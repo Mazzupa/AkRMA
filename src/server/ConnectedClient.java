@@ -41,12 +41,13 @@ public class ConnectedClient extends Thread {
 					
 					System.out.println("Tentativo di connessione...");
 					//indirizzo server, porta, nome database, username, password
+					//TODO da migliorare
 					DatabaseManager dbh = new DatabaseManager("mazzupa.ddns.net", "3306", "UTENTI", "Admin", "Admin");
 					System.out.println("Connessione riuscita");
 					
 					ResultSet rs = dbh.Query(msg);
 					
-					sendMsg(rs.toString(), this.clientSocket);
+					sendMsg(rs, this.clientSocket);
 					
 				}
 			}
@@ -57,9 +58,9 @@ public class ConnectedClient extends Thread {
 		}
 	}
 	
-	private void sendMsg(String msg, Socket dest) throws IOException {
+	private void sendMsg(ResultSet msg, Socket dest) throws IOException {
 		PrintWriter outStream = new PrintWriter(new OutputStreamWriter(dest.getOutputStream()), true);
-		outStream.println(this.username + ">> " + msg);
+		outStream.println(msg);
 	}
 
 }

@@ -41,7 +41,7 @@ public class Server extends Thread {
 				System.out.println(
 						"Server> Connection accepted: " + clientSocket.getInetAddress() + ":" + clientSocket.getPort());
 
-				ConnectedClient client = new ConnectedClient(serverSocket, clientSocket, "username" + connectedClient.size());
+				ConnectedClient client = new ConnectedClient(serverSocket, clientSocket, "user" + connectedClient.size());
 				connectedClient.add(client);
 			}
 
