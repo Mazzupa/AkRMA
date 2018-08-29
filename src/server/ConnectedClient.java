@@ -31,7 +31,6 @@ public class ConnectedClient extends Thread {
 		try {
 			inStream = new Scanner(new InputStreamReader(clientSocket.getInputStream()));
 			
-
 			String msg;
 			while (true) {
 				if(clientSocket.isClosed())

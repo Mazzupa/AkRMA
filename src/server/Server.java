@@ -29,7 +29,7 @@ public class Server extends Thread {
 			ServerSocket serverSocket = new ServerSocket(PORT);
 			System.out.println("[SERVER CONSOLE]");
 			System.out.println("Server " + serverSocket.getInetAddress() + ":" + PORT + ": ONLINE...");
-			//ServerConsole serverConsole = new ServerConsole(serverSocket);
+			ServerConsole serverConsole = new ServerConsole(serverSocket);
 
 			while (true) {
 				Socket clientSocket = serverSocket.accept();
