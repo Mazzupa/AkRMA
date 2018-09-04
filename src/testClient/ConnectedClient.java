@@ -2,16 +2,17 @@ package testClient;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class ConnectedClient extends Thread{
 
 	private Socket _server;
 	private MuThDBH _muThDBH;
+	@SuppressWarnings(value = { "unused" })
 	private String _username;
 	
 	public ConnectedClient(String username, Socket server, MuThDBH MuTrDBMaH) {
@@ -24,11 +25,11 @@ public class ConnectedClient extends Thread{
 	public void run() {
 		
 		Scanner inStream = null;
-		PrintWriter outStream = null;
+		ObjectOutputStream oos = null;
 		
 		try {
 			inStream = new Scanner(new InputStreamReader(_server.getInputStream()));
-			outStream = new PrintWriter(new OutputStreamWriter(_server.getOutputStream()), true);
+			oos = new ObjectOutputStream(_server.getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -41,12 +42,23 @@ public class ConnectedClient extends Thread{
 			e1.printStackTrace();
 		}
 		//invio risultati
-		outStream.println(rs.toString());
+		
+		MyResulSet mrs = new MyResulSet();
+		try {
+			mrs.create(rs);
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+		
+		try {
+			oos.writeObject(mrs);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		
 		
 		
 		inStream.close();
-		outStream.close();
 		try {
 			_server.close();
 		} catch (IOException e) {

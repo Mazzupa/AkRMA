@@ -18,6 +18,7 @@ public class MuThDBH {
 	
 	public MuThDBH(DatabaseManager DBH) {
 		_DBH = DBH;
+		_mutex = new Semaphore(1);
 	}
 	
 	public synchronized ResultSet query(String query) throws InterruptedException {

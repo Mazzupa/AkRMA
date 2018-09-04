@@ -16,7 +16,7 @@ public class Server {
 
 		//TODO da migliorare (sopratutto gestione psw)
 		//Indirizzo db, porta db, nome db, username, password
-		DatabaseManager DBH = new DatabaseManager("localhost", "3306", "PROVA", "root", "");
+		DatabaseManager DBH = new DatabaseManager("localhost", "3306", "prova", "root", "");
 		MuThDBH muThDBH = new MuThDBH(DBH);
 		
 		ServerSocket serverSocket = new ServerSocket(PORT);
