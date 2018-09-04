@@ -1,3 +1,7 @@
+/**
+ * client di test
+ */
+
 package testClient;
 
 import java.io.IOException;

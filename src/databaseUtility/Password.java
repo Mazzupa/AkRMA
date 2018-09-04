@@ -1,4 +1,12 @@
+/**
+ * Classe per gestire il salvataggio sicuro delle password 
+ * cifrate con l'algoritmo d hashing SHA-512
+ * 
+ * @author Mazzucchetti Patrick
+ */
+
 package databaseUtility;
+
 import java.security.*;
 
 public class Password {

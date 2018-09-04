@@ -1,3 +1,7 @@
+/**
+ * core class del server
+ * @author Mazzucchetti Patrick
+ */
 package testClient;
 
 import java.io.IOException;
@@ -9,16 +13,18 @@ import databaseUtility.DatabaseManager;
 
 public class Server {
 
+	// in ascolto sulla porta
 	public static final int PORT = 1518;
+	// client connessi
 	public static ArrayList<ConnectedClient> clients = new ArrayList<>();
 
 	public static void main(String[] args) throws IOException {
 
-		//TODO da migliorare (sopratutto gestione psw)
-		//Indirizzo db, porta db, nome db, username, password
+		// TODO da migliorare (sopratutto gestione psw)
+		// Indirizzo db, porta db, nome db, username, password
 		DatabaseManager DBH = new DatabaseManager("localhost", "3306", "prova", "root", "");
 		MuThDBH muThDBH = new MuThDBH(DBH);
-		
+
 		ServerSocket serverSocket = new ServerSocket(PORT);
 		Socket server = null;
 		while (true) {
@@ -27,12 +33,12 @@ public class Server {
 			System.out.println("Conection accepted from " + server.getInetAddress());
 
 			clients.add(new ConnectedClient("user " + clients.size(), server, muThDBH));
-			
-			if(server.isClosed()) {
+
+			if (server.isClosed()) {
 				break;
 			}
 		}
-		
+
 		serverSocket.close();
 		server.close();
 	}
